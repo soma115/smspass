@@ -1,0 +1,31 @@
+- UWAGA!!! Musi być zdjęty kod PIN z kart SIM!
+
+
+- Ustaw USB modemu w pliku install.sh (linia: sed -i 's/port = none/port = \/dev\/ttyUSB0/g' /etc/gnokiirc)
+
+
+- Skonfiguruj Apache:
+
+# Ponizsze dodac do definicji vhosta:
+
+# okresla do ktorego katalogu chcemy uzyskac dostep:
+<Directory "/var/www/html">
+        # plik z numerami telefonu i hasłem:
+        AuthUserFile "/etc/smspass/smspass.db"
+        AuthType Basic
+        # opis pojawiajacy sie w oknie logowania:
+        AuthName "Podaj prosze swoj numer telefonu i haslo jednorazowe z SMS'a"
+        Require valid-user
+</Directory>
+
+
+- Aby uruchomić z palca użyj:
+    ./smspass.py
+
+
+- Inne przydatne polecenia Gnokii:
+http://wiki.gnokii.org/index.php/Smsd
+gnokii --deletesms ME 0 2
+gnokii --getsms ME 0
+gnokii --showsmsfolderstatus
+echo "tresc sms'a" | sudo gnokii --sendsms +48791366206
