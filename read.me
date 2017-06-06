@@ -7,25 +7,20 @@
 - Skonfiguruj Apache:
 
 # Utworzyć vhost, który przekieruje ruch z internetu do aplikacji wewnętrznej:
-
-# okresla do ktorego katalogu chcemy uzyskac dostep:
-<Directory "/var/www/html">
-        # plik z numerami telefonu i hasłem:
+<VirtualHost *:80>
+    <Directory "/var/www/html">
         AuthUserFile "/opt/bin/smspass/smspass.db"
         AuthType Basic
-        # opis pojawiajacy sie w oknie logowania:
         AuthName "Podaj prosze swoj numer telefonu i haslo jednorazowe z SMS'a"
         Require valid-user
-</Directory>
-
-
-<VirtualHost 185.75.37.42:80>
-ProxyPreserveHost On
-ProxyPass / http://192.168.0.5:80/
-ProxyPassReverse / http://192.168.0.5:80/
+    </Directory>
+    ProxyPreserveHost On
+    ProxyPass /a http://127.0.0.1:80/b
+    ProxyPassReverse /a http://127.0.0.1:80/b
 </VirtualHost>
 
-
+185.75.37.42
+192.168.0.5
 
 - Aby uruchomić z palca użyj:
     ./smspass.py
@@ -37,7 +32,6 @@ gnokii --deletesms ME 0 2
 gnokii --getsms ME 0
 gnokii --showsmsfolderstatus
 echo "tresc sms'a" | sudo gnokii --sendsms +48791366206
-
 
 
 

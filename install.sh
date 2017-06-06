@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+yum -y install wget
+
 # Dodaj EPEL repo aby zainstalowac Gnokii:
 wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
 rpm -ivh epel-release-7-9.noarch.rpm
 
-if yum -y install httpd wget gcc intltool spice-glib-devel gnokii
+if yum -y install httpd gcc intltool spice-glib-devel gnokii
 then
     echo "iptables -I INPUT -p tcp --dport 80 -j ACCEPT" >> /etc/rc.local
     iptables -I INPUT -p tcp --dport 80 -j ACCEPT
@@ -22,5 +24,3 @@ then
 else
   echo ">>> Problem z instalacja <<<"
 fi
-
-

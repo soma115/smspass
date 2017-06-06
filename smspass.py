@@ -10,10 +10,10 @@ import string
 # DONE: odbieranie SMS'a
 # DONE: generowanie hasła z pythona
 # DONE: wysyłanie SMS'a:
-# TODO: apache authentication
+# DONE: apache authentication
         # https://www.thomas-krenn.com/pl/wiki/Zabezpieczenie_has%C5%82em_zasob%C3%B3w_serwera_WWW
 
-# TODO: przekierowanie strony z internetu
+# DONE: przekierowanie strony z internetu
 
 # TODO: wygasanie hasla
         # cron co godzine
