@@ -13,6 +13,8 @@ import string
 # TODO: apache authentication
         # https://www.thomas-krenn.com/pl/wiki/Zabezpieczenie_has%C5%82em_zasob%C3%B3w_serwera_WWW
 
+# TODO: przekierowanie strony z internetu
+
 # TODO: wygasanie hasla
         # cron co godzine
         # chmod a+x foo.py
@@ -131,6 +133,7 @@ def sprawdz_numer(tel, tresc):
 
         if wpisy.find(tel):
             print('Tego numeru telefonu nie ma na liscie osob uprawnionych')
+            print(tel)
         else:
             wyslij_haslo_jednorazowe(tel)
     else:

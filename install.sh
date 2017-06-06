@@ -17,6 +17,7 @@ then
     sed -i 's/port = none/port = \/dev\/ttyUSB2/g' /etc/gnokiirc
     sed -i 's/model = fake/model = AT/g' /etc/gnokiirc
     sed -i 's/use_locking = yes/use_locking = no/g' /etc/gnokiirc
+    sed -i 's/debug = on/debug = off/g' /etc/gnokiirc
     echo ">>> Wszystko poszlo dobrze <<<"
 else
   echo ">>> Problem z instalacja <<<"
