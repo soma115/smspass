@@ -100,14 +100,14 @@ def update(username, password):
         matching_entries[0][1] = pwhash
     else:
         entries.append([username, pwhash])
-    save(hasla, entries)
+    save(workdir+hasla, entries)
 
 
 def delete(username):
     """Remove the entry for the given user."""
     entries = load(hasla)
     entries = [entry for entry in entries if entry[0] != username]
-    save(hasla, entries)
+    save(workdir+hasla, entries)
 
 
 def wyslij_haslo_jednorazowe(tel):
