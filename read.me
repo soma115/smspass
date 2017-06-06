@@ -6,7 +6,7 @@
 
 - Skonfiguruj Apache:
 
-# Ponizsze dodac do definicji vhosta:
+# Utworzyć vhost, który przekieruje ruch z internetu do aplikacji wewnętrznej:
 
 # okresla do ktorego katalogu chcemy uzyskac dostep:
 <Directory "/var/www/html">
@@ -19,6 +19,14 @@
 </Directory>
 
 
+<VirtualHost 185.75.37.42:80>
+ProxyPreserveHost On
+ProxyPass / http://192.168.0.5:80/
+ProxyPassReverse / http://192.168.0.5:80/
+</VirtualHost>
+
+
+
 - Aby uruchomić z palca użyj:
     ./smspass.py
 
@@ -29,3 +37,44 @@ gnokii --deletesms ME 0 2
 gnokii --getsms ME 0
 gnokii --showsmsfolderstatus
 echo "tresc sms'a" | sudo gnokii --sendsms +48791366206
+
+
+
+
+# ---------------------
+
+
+NameVirtualHost 192.168.6.229:81
+Listen 81
+#========================== Default vhost ===============================
+<VirtualHost 192.168.6.229>
+    ServerName 192.168.6.229:81
+
+    #DocumentRoot /opt/SERWERY/APACHE/2.2.16//htdocs/
+
+    <Directory "/var/www/html/">
+        #AllowOverride None
+        #Options Indexes FollowSymLinks
+        #Order allow,deny
+        #Allow from all
+
+        AuthUserFile "/etc/smspass/smspass.db"
+        AuthType Basic
+        # opis pojawiajacy sie w oknie logowania:
+        AuthName "Podaj prosze swoj numer telefonu i haslo jednorazowe z SMS'a"
+        Require valid-user
+    </Directory>
+
+    #ErrorLog "logs/http_default_error_log"
+    #CustomLog "logs/http_default_access_log" common
+    #LogLevel info
+
+    #ErrorDocument 403 "/esod_bledny_kontekst.html"
+    #ErrorDocument 404 "/esod_bledny_kontekst.html"
+
+RewriteEngine On
+RewriteCond %{LA-U:REMOTE_USER} !^$
+RewriteRule ^/(.*) http://192.168.6.229/$1   [P,L]
+#RewriteRule /.* http://192.168.6.229:81/$1 [R]
+#RewriteRule /.* http://192.168.6.229:81/start.html [R]
+</VirtualHost>
