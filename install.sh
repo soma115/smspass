@@ -13,7 +13,7 @@ then
     mkdir -p /opt/bin/smspass
     cp ./smspass.py /opt/bin/smspass
     cp ./smspass.db /opt/bin/smspass
-    echo "/opt/bin/smspass/smspass.py &" >> /etc/rc.local
+    echo "/opt/bin/smspass/smspass.py 2>/dev/null 1>>./log.txt &" >> /etc/rc.local
     sed -i 's/port = none/port = \/dev\/ttyUSB2/g' /etc/gnokiirc
     sed -i 's/model = fake/model = AT/g' /etc/gnokiirc
     sed -i 's/use_locking = yes/use_locking = no/g' /etc/gnokiirc

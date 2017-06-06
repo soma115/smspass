@@ -131,11 +131,13 @@ def sprawdz_numer(tel, tresc):
         plik = open(workdir + hasla, 'r')
         wpisy = plik.read()
 
-        if wpisy.find(tel):
-            print('Tego numeru telefonu nie ma na liscie osob uprawnionych')
-            print(tel)
-        else:
-            wyslij_haslo_jednorazowe(tel)
+        linie = wpisy.split('\n')
+        for i in linie:
+            if i.find(tel):
+                print('Tego numeru telefonu nie ma na liscie osob uprawnionych')
+                print(tel)
+            else:
+                wyslij_haslo_jednorazowe(tel)
     else:
         print('Nieprawidlowe haslo')
 
